@@ -1,0 +1,50 @@
+
+<ul id="navUl" > 
+  <li class="hide">隐藏</li> 
+  <li class="show">显示</li> 
+</ul>   
+<style>
+  #navUl {
+    display: flex; 
+    position: fixed;
+    padding: 0 2px;
+    z-index: 1000;
+    font-size: 20px;
+    flex-wrap: wrap; 
+    list-style: none;
+    /* display: none; */
+  }
+  #navUl li{ 
+    border: 1px solid #000;
+    background-color: #fff;
+    padding: 1px 5px;
+  }
+
+  #navUl li.red{ 
+   color: red;
+  }
+
+  #navUl li.active{ 
+   font-weight: bold;
+  }
+  </style>
+
+<script>   
+_testDebugArray.forEach( (o) => { 
+  $('#navUl').append(`<li class="${_testDebugMarkArray.includes(o) ? 'red' : ''}">${o}</li>`)
+}) 
+$('#navUl li').click(function() {
+  if($(this).html() == "隐藏") {
+    $('#navUl li').hide()
+    $('#navUl li.show').show()
+  }
+  if($(this).html() == "显示") { 
+    $('#navUl li').show()
+  }
+  let src = $(this).html()
+  $(this).addClass("active").siblings().removeClass("active")
+  $(".body_container").load(`./${src}.html`);
+  $("title").text(src)
+  window.scrollTo(0,0)
+}) 
+</script>
